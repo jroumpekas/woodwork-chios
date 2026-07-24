@@ -26,7 +26,7 @@ const GallerySection = () => {
                         className="group overflow-hidden rounded-2xl bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
                     >
                         <img
-                            src={work.image}
+                            src={work.coverImage}
                             alt={work.title}
                             className="h-56 w-full object-cover transition duration-300 group-hover:scale-105"
                             loading="lazy"
