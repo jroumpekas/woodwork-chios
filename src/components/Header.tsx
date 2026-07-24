@@ -67,7 +67,7 @@ const Header = () => {
                     </a>
 
                     <a
-                        href="https://www.facebook.com/"
+                        href="https://www.facebook.com/profile.php?id=100083273590487"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="rounded-full bg-white px-4 py-2 text-red-900 transition hover:bg-stone-100"

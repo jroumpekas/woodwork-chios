@@ -17,7 +17,7 @@ const ContactSection = () => {
 
                 <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
                     <a
-                        href="https://www.facebook.com/TO-DIKO-SOU-LINK"
+                        href="https://www.facebook.com/profile.php?id=100083273590487"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="rounded-full bg-white px-6 py-3 font-semibold text-red-900 transition hover:bg-stone-100"
