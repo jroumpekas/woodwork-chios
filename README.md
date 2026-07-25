@@ -1,208 +1,323 @@
-# Woodwork Chios
+🪵 Woodwork Chios
 
-A responsive portfolio website for a woodworking workshop based in Chios, Greece.
-The website presents custom furniture, interior woodworking projects, bespoke kitchen installations, and selected past works through a clean, image-focused layout.
+A responsive woodworking portfolio built with React and TypeScript
 
-> 🚧 **Status:** Active development
+<p>
+  A clean, image-focused website showcasing custom furniture, kitchen installations,
+  interior woodwork and bespoke wooden constructions in Chios, Greece.
+</p>
 
----
 
-## 🛠️ Tech Stack
 
-* **React** with **TypeScript** — component-based UI with type safety
-* **Vite** — fast development server and optimized production builds
-* **React Router** — client-side routing for homepage and work detail pages
-* **Tailwind CSS** — responsive styling and utility-first layout
-* **ESLint** — code quality and consistency
 
----
 
-## ✨ Features
+📌 About the Project
 
-* Responsive single-page homepage layout
-* Fixed responsive navigation bar with mobile menu
-* Smooth section navigation for:
+Woodwork Chios is a frontend portfolio website created for a woodworking workshop. It presents completed projects through a responsive homepage, reusable project cards and dedicated detail pages containing image galleries.
 
-    * Hero
-    * About
-    * Services
-    * Gallery
-    * Contact
-* Portfolio gallery with reusable work cards
-* Dynamic work detail pages using route slugs:
+The application follows a data-driven structure: project information is managed centrally in src/data/work.ts, while React components render the portfolio dynamically. This makes new projects easier to add without duplicating page logic.
 
-    * `/works/:slug`
-* Data-driven portfolio structure through a static `works` catalog
-* Dedicated image galleries for each project
-* Lazy-loaded project images for better performance
-* Contact call-to-action through Facebook
+✅ Project status: The main portfolio experience is complete and ready for optional future improvements or deployment.
 
----
+✨ Features
 
-## 📁 Project Structure
+Responsive, mobile-first homepage
 
-```text
+Fixed navigation header with desktop and mobile menus
+
+Clickable logo that returns the visitor to the homepage
+
+Smooth navigation to the Services, Works and Contact sections
+
+Reusable project cards generated from portfolio data
+
+Six woodworking projects with individual cover images
+
+Project titles, categories and descriptions
+
+Dynamic project pages using URL slugs
+
+Dedicated image gallery for every project
+
+Automatic gallery image loading with Vite's import.meta.glob()
+
+Numeric image sorting for filenames such as image-2.jpg and image-10.jpg
+
+Lazy-loaded images for improved page performance
+
+Facebook contact call-to-action
+
+Greek document language, title and description metadata
+
+🛠️ Tech Stack
+
+Technology
+
+Purpose
+
+React 19
+
+Component-based user interface
+
+TypeScript 6
+
+Type-safe project data and components
+
+React Router 7
+
+Client-side routing and dynamic project pages
+
+Vite 8
+
+Development server and production build tooling
+
+Tailwind CSS 4
+
+Responsive utility-first styling
+
+ESLint
+
+Code quality and consistency
+
+🧭 Application Routes
+
+Route
+
+Description
+
+/
+
+Homepage with the Hero, About, Services, Works and Contact sections
+
+/works/:slug
+
+Dynamically generated detail page for the selected project
+
+Example:
+
+/works/xylini-kouzina
+
+🧱 Portfolio Architecture
+
+Portfolio projects are managed in:
+
+src/data/work.ts
+
+Each project follows the Work type:
+
+export type Work = {
+slug: string;
+title: string;
+category: WorkCategory;
+coverImage: string;
+description: string;
+images: string[];
+featured?: boolean;
+};
+
+Field overview
+
+Field
+
+Description
+
+slug
+
+Unique value used to create the project URL
+
+title
+
+Project name displayed in the interface
+
+category
+
+Category assigned to the woodworking project
+
+coverImage
+
+Main image displayed on the homepage card
+
+description
+
+Short summary displayed on the project page
+
+images
+
+Gallery images displayed on the detail page
+
+featured
+
+Optional flag used to control homepage visibility
+
+The selected project is retrieved through its slug:
+
+export const getWorkBySlug = (slug: string | undefined) => {
+return works.find((work) => work.slug === slug);
+};
+
+🖼️ Image Organization
+
+Each project gallery is stored in its own folder under:
+
+src/assets/works/
+
+Current gallery structure:
+
+src/assets/works/
+├── eidiki-xylini-kataskevi/
+├── epiplo-kata-paraggelia/
+├── esoteriki-xylourgiki-ergasia/
+├── sinthesi-kouzinas_kai-ntoulapia/
+├── xylini-kataskevi/
+└── xylini-kouzina/
+
+Gallery images are loaded automatically with Vite:
+
+const projectImages = loadImages(
+import.meta.glob(
+"../assets/works/project-folder/*.jpg",
+{
+eager: true,
+import: "default",
+}
+) as Record<string, string>
+);
+
+A helper sorts the imported image paths numerically before returning the final array, ensuring that image-10.jpg appears after image-9.jpg rather than after image-1.jpg.
+
+📁 Project Structure
+
 woodwork-chios/
-├── public/                 # Static public assets
+├── public/                      # Static public assets
 ├── src/
-│   ├── assets/             # Images and media used across the app
-│   │   └── works/          # Portfolio project images
-│   ├── components/         # Reusable UI components
-│   │   ├── Header.tsx
+│   ├── assets/                  # Images and media
+│   │   └── works/               # Cover images and gallery folders
+│   ├── components/              # Shared layout and navigation components
 │   │   ├── Footer.tsx
+│   │   ├── Header.tsx
 │   │   └── Layout.tsx
-│   ├── data/               # Static data used by the app
+│   ├── data/                    # Static portfolio and service data
 │   │   ├── services.ts
 │   │   └── work.ts
-│   ├── pages/              # Page-level components
+│   ├── pages/                   # Route-level pages
 │   │   ├── Homepage.tsx
 │   │   └── WorkDetailsPage.tsx
-│   ├── sections/           # Homepage sections
-│   │   ├── HeroSection.tsx
+│   ├── sections/                # Homepage sections
 │   │   ├── AboutSection.tsx
-│   │   ├── ServicesSection.tsx
+│   │   ├── ContactSection.tsx
 │   │   ├── GallerySection.tsx
-│   │   └── ContactSection.tsx
-│   ├── App.tsx             # Root component and route definitions
-│   ├── main.tsx            # Application entry point
-│   └── index.css           # Global styles
-├── index.html
-├── vite.config.ts
+│   │   ├── HeroSection.tsx
+│   │   └── ServicesSection.tsx
+│   ├── App.tsx                  # Router and route definitions
+│   ├── index.css                # Global styles and Tailwind setup
+│   └── main.tsx                 # React entry point
+├── index.html                   # HTML entry point and SEO metadata
+├── package.json
 ├── tsconfig.json
-└── package.json
-```
+└── vite.config.ts
 
----
+🚀 Getting Started
 
-## 🚀 Getting Started
+Prerequisites
 
-### Prerequisites
+Make sure the following are installed:
 
-Make sure you have installed:
+Node.js 18 or later
 
-* **Node.js** 18 or higher
-* **npm**
+npm
 
----
+Installation
 
-### Installation
-
-Clone the repository and install dependencies:
-
-```bash
 git clone https://github.com/jroumpekas/woodwork-chios.git
 cd woodwork-chios
 npm install
-```
 
----
+Start the development server
 
-### Running Locally
-
-Start the development server:
-
-```bash
 npm run dev
-```
 
-The app will be available at:
+The application will normally be available at:
 
-```text
 http://localhost:5173
-```
 
----
+Create a production build
 
-### Building for Production
-
-Create an optimized production build:
-
-```bash
 npm run build
-```
 
-The production-ready files will be generated inside the `dist/` folder.
+The optimized production files will be generated inside the dist/ directory.
 
-To preview the production build locally:
+Preview the production build
 
-```bash
 npm run preview
-```
 
----
+Run ESLint
 
-## 📜 Available Scripts
+npm run lint
 
-| Command           | Description                          |
-| ----------------- | ------------------------------------ |
-| `npm run dev`     | Start the Vite development server    |
-| `npm run build`   | Create a production build            |
-| `npm run preview` | Preview the production build locally |
-| `npm run lint`    | Run ESLint across the project        |
+📜 Available Scripts
 
----
+Command
 
-## 🧱 Main Implementation Details
+Description
 
-### Data-driven portfolio
+npm run dev
 
-Portfolio items are stored in `src/data/work.ts`.
+Start the Vite development server
 
-Each work item includes:
+npm run build
 
-* `slug`
-* `title`
-* `image`
-* `description`
-* `images`
-* optional `featured` flag
+Run TypeScript checks and create a production build
 
-This makes it easier to add, remove, or update portfolio projects without changing the gallery component logic.
+npm run preview
 
----
+Preview the production build locally
 
-### Dynamic work pages
+npm run lint
 
-Work detail pages are handled through React Router:
+Run ESLint across the project
 
-```tsx
-<Route path="/works/:slug" element={<WorkDetailsPage />} />
-```
+✅ Project Status
 
-Each page is generated dynamically based on the selected work slug.
+The project currently includes the complete core portfolio flow:
 
----
+Responsive homepage
 
-### Responsive layout
+Desktop and mobile navigation
 
-The website uses Tailwind CSS responsive utilities to support:
+Reusable portfolio cards
 
-* mobile-first layout
-* tablet-friendly grids
-* desktop portfolio cards
-* responsive navigation menu
-* adaptive image sizing
+Dynamic project detail pages
 
----
+Multiple galleries loaded from project folders
 
-## 🗺️ Roadmap
+Project categories and cover images
 
-* [ ] Add image lightbox/modal for project galleries
-* [ ] Add contact form with email integration
-* [ ] Add SEO meta tags and page titles
-* [ ] Optimize images and convert large assets to WebP
-* [ ] Add multilingual support: Greek / English
-* [ ] Add dedicated `/works` page for all portfolio projects
-* [ ] Deploy to production using Vercel or Netlify
+Homepage navigation through the logo
 
----
+Greek page metadata
 
-## 👤 Author
+Production build and lint scripts
 
-**Dimitris Roumpekas**
+Optional future improvements
 
-* GitHub: [@jroumpekas](https://github.com/jroumpekas)
+Image lightbox with previous and next controls
 
----
+Project filtering by category
 
-Built with React, TypeScript, Vite, and Tailwind CSS.
+Dedicated page containing all projects
+
+Contact form with email integration
+
+Custom 404 page
+
+Image conversion to WebP or AVIF
+
+Greek and English language support
+
+Production deployment through Vercel or Netlify
+
+👤 Author
+
+Dimitris Roumpekas
+
+Built with React, TypeScript, Vite and Tailwind CSS.
