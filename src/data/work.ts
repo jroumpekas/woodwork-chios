@@ -2,6 +2,8 @@ import work1 from "../assets/works/work1.jpg";
 import work2 from "../assets/works/work2.jpg";
 import work3 from "../assets/works/work3.jpg";
 import work4 from "../assets/works/work4.jpg";
+import work5 from "../assets/works/work5.jpg";
+import work6 from "../assets/works/work6.jpg";
 
 
 const loadImages = (
@@ -56,13 +58,37 @@ const specialConstructionImages = loadImages(
     ) as Record<string, string>
 );
 
+const kitchenConstructionImage: string[] = loadImages(
+    import.meta.glob(
+        "../assets/works/sinthesi-kouzinas_kai-ntoulapia/*.jpg",
+        {
+            eager: true,
+            import: "default",
+        }
+    )
+);
+
+const woodKitchenConstructionImage: string[] = loadImages(
+    import.meta.glob(
+        "../assets/works/xylini-kouzina/*.jpg",
+        {
+            eager: true,
+            import: "default",
+        }
+
+    )as Record<string, string>
+)
+
 
 export type WorkCategory =
     | "Κουζίνες"
     | "Έπιπλα"
     | "Εσωτερικοί χώροι"
     | "Επαγγελματικοί χώροι"
-    | "Ειδικές κατασκευές";
+    | "Ειδικές κατασκευές"
+    | "Σύνθεση Κουζίνας και Ντουλάπια"
+    | "Ξύλινη Κουζίνα"
+
 
 export type Work = {
     slug: string;
@@ -114,6 +140,29 @@ export const works: Work[] = [
         images: specialConstructionImages,
         featured: true,
     },
+
+    {
+        slug: "sinthesi-kouzinas_kai-ntoulapia",
+        title: "Σύνθεση Κουζίνας και Ντουλάπια",
+        coverImage: work5,
+        category: "Σύνθεση Κουζίνας και Ντουλάπια",
+        description:
+            "Σχεδιασμός και κατασκευή σύνθεσης κουζίνας με λειτουργικά ντουλάπια, προσαρμοσμένα στις διαστάσεις και στις ανάγκες του χώρου, με έμφαση στην εργονομία, την αποθήκευση και την αισθητική.",
+        images: kitchenConstructionImage,
+        featured: true,
+    },
+
+    {
+        slug: "xylini-kouzina",
+        title: "Ξύλινη Κουζίνα",
+        coverImage: work6,
+        category: "Ξύλινη Κουζίνα",
+        description:
+        "Χειροποίητη ξύλινη κουζίνα υψηλής αισθητικής και αντοχής, σχεδιασμένη στα μέτρα σας " +
+            "με έμφαση στη λειτουργικότητα και τη λεπτομέρεια.",
+        images: woodKitchenConstructionImage,
+        featured: true,
+    }
 ];
 
 export const featuredWorks = works.filter((work) => work.featured);
