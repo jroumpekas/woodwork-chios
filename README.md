@@ -1,6 +1,6 @@
 # Woodwork Chios
 
-A responsive portfolio website for a woodworking workshop based in Chios, Greece.
+A responsive portfolio website for a family woodworking workshop, second generation.
 The website presents custom furniture, interior woodworking projects, bespoke kitchen installations, and selected completed works through a clean, image-focused layout.
 
 > ✅ **Status:** Completed and open to future improvements
